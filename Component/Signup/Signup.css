@@ -1,0 +1,158 @@
+body{
+    font-family: 'Josefin Sans', sans-serif;
+    font-weight: 1500;
+    font-size: larger;
+}
+.main{
+    display: flex;
+    flex-direction: row;
+    height: 95vh;
+    width: 60vw;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid #D3D3D3;
+    border-radius: 7px;
+    justify-content: space-around;
+    margin-left: 25%;
+}
+.form{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+.logo{
+    margin-bottom: 10px;
+    text-align: start;
+}
+.name{
+    display: flex;
+    margin-bottom: 20px;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+.name input{
+    width: 170px;
+    height: 30px;
+    font-family: 'Josefin Sans', sans-serif;
+    font-weight: 1000;
+    font-size: medium;
+}
+.email input{
+    width: 385px;
+    height: 30px;
+    font-family: 'Josefin Sans', sans-serif;
+    font-weight: 1000;
+    font-size: medium;
+}
+.email h6{
+    margin: 10px;
+    color: #646464;
+    margin-bottom: 30px;
+}
+.password{
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+.password input{
+    width: 170px;
+    height: 30px;
+    font-family: 'Josefin Sans', sans-serif;
+    font-weight: 1000;
+    font-size: medium;
+}
+.pass h6{
+    margin: 10px;
+    color: #646464;
+    margin-bottom: 30px;
+}
+.check{
+    height: 18px;
+    width: 18px;
+    margin-bottom: 20px;
+}
+.button button{
+    background-color: #247cec;
+    border: none;
+    font-family: 'Josefin Sans', sans-serif;
+    font-weight: 1000;
+    font-size: large;
+    color: white;
+    padding: 10px 20px 8px 20px;
+    border-radius: 4px;
+    margin-left: 13rem;
+}
+.image{
+    text-align: center;
+}
+.footercontainer{
+    display: flex;
+    flex-direction: row;
+    margin: 20px;
+    gap: 28rem;
+    margin-left: 30%;
+}
+.footer{
+    display: flex;
+    justify-content: space-around;
+    font-size: small;
+}
+.footer a{
+    margin: 10px;
+}
+
+@media screen and (min-width: 320px) and (max-width: 768px)
+{
+    .main{
+      border: none;
+      height: 130vh;
+      width: 100vw;
+      margin: 10px;
+      justify-content: flex-start;
+      margin-top: 0;
+      align-items: flex-start;
+    }
+    .image{
+        display: none;
+    }
+    .footercontainer{
+        justify-content: space-between;
+        margin: 0;
+        gap: 0;
+    }
+    .name input{
+        width: 90vw;
+    }
+    .email input{
+        width: 90vw;
+    }
+    .password input {
+        width: 90vw;
+    }
+    .button {
+        display: flex;
+        justify-content: space-between;
+    }
+}
+@media screen and (min-width: 769px) and (max-width: 1024px){
+    .main{
+        border: none;
+        align-items: flex-start;
+        width: 80vw;
+        height: 100vh;
+        margin-left: 10%;
+        margin-right: 10%;
+        justify-content: flex-start;
+    }
+    .form{
+        margin: 20px;
+    }
+    .image{
+        display: none;
+    }
+    .footercontainer{
+        display: none;
+    }
+    
+}
+    
