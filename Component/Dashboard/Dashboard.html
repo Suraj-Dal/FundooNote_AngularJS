@@ -1,0 +1,118 @@
+<body>
+    <div ng-controller="fundooappCtrl as note" ng-init="getAllNotes()">
+        <header class="headerhc">
+            <div class="logohc">
+                <img src="../../Image/Menu.png" width="20px" , height="15px" />
+                <img src="../../Image/keep.png" alt="Fundoo Notes" width="40px" , height="40px" />
+                <div>Notes</div>
+            </div>
+            <div class="searchhc">
+                <SearchIcon fontSize="medium" />
+                <input type="text" placeholder="Search" />
+            </div>
+            <div class="opthc">
+                <img src="../../Image/refresh.png" width="18px" , height="18px" />
+                <img src="../../Image/view.png" width="25px" , height="23px" style="opacity: 0.5;" />
+                <img src="../../Image/settings.png" width="18px" , height="18px" />
+            </div>
+            <div class="userhc">
+                <img src="../../Image/apps.png" width="18px" , height="18px" style="opacity: 0.6;" />
+                <img src="../../Image/Accounts.png" width="25px" , height="25px" />
+            </div>
+        </header>
+        <div style="display: flex;">
+            <div class="icon" style="opacity: 0.7;">
+                <a href="#" class="sidenavdiv" id="Notes"
+                    style="display: flex; align-items: center; gap: 2.5rem; text-decoration: none;">
+                    <img src='../../Image/noteIcon.png' width="22px" , height="25px" />
+                    <p>Notes</p>
+                </a>
+                <a href="#" class="sidenavdiv" id="Remainder"
+                    style="display: flex; align-items: center;gap: 2.5rem;text-decoration: none;">
+                    <img src='../../Image/bell.png' width="23px" , height="27px" />
+                    <p>Remainder</p>
+                </a>
+                <a href="#" class="sidenavdiv" id="Label"
+                    style="display: flex; align-items: center;gap: 2.5rem;text-decoration: none;">
+                    <img src='../../Image/EditIcon.png' width="21px" , height="25px" />
+                    <p>Label</p>
+                </a>
+                <a href="#" class="sidenavdiv" id="Archive"
+                    style="display: flex; align-items: center;gap: 2.5rem;text-decoration: none;">
+                    <img src='../../Image/ArchiveIcon.png' width="23px" , height="25px" />
+                    <p>Archive</p>
+                </a>
+                <a href="#" class="sidenavdiv" id="Trash"
+                    style="display: flex; align-items: center;gap: 2.5rem;text-decoration: none;">
+                    <img src='../../Image/TrashIcon.png' width="22px" , height="25px" />
+                    <p>Trash</p>
+                </a>
+            </div>
+            <div>
+                <div class="note" style="width: 70vw;">
+                    <main class="takeNoteOne" ng-show="showButtons.includes(0)" ng-click="toggle1()">
+                        <input type="text" placeholder="Take a note..." />
+                        <div class="imgtno">
+                            <img src="../../Image/checkbox.png" width="20px" , height="20px" />
+                            <img src="../../Image/brush.png" width="22px" , height="25px" />
+                            <img src="../../Image/photo.png" width="22px" , height="25px" />
+                        </div>
+                    </main>
+                    <div class="takenotetwo" ng-show="showButtons.includes(1)">
+                        <div class="titletnt">
+                            <input type="text" placeholder="Title" ng-model="title" />
+                            <div class="pin"><img src="../../Image/pin.png" width="22px" , height="22px" /></div>
+                        </div>
+                        <input type="text" placeholder="Take a note..." ng-model="description" />
+                        <div class="icontnt">
+                            <div class="icontntimg">
+                                <img src="../../Image/bell.png" width="20px" , height="20px" />
+                                <img src="../../Image/add-user.png" width="20px" , height="20px" />
+                                <img src="../../Image/paint-palette.png" width="20px" , height="20px" />
+                                <img src="../../Image/photo.png" width="20px" , height="20px" />
+                                <img src="../../Image/ArchiveIcon.png" width="20px" , height="20px" />
+                                <img src="../../Image/more-vert.png" width="20px" , height="20px" />
+                                <img src="../../Image/undo.png" width="20px" , height="20px" />
+                                <img src="../../Image/redo.png" width="20px" , height="20px" />
+                            </div>
+                            <div class="close" style="cursor:pointer;" ng-click="postNote(title,description)">Close
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div style="display: flex;flex-wrap: wrap; margin: 0;">
+                    <div class="takenotethree" ng-repeat="note in myNotes">
+                        <div class="notetnh">
+                            <div class="titletnh">
+                                <h4>{{note.title}}</h4>
+                                <img src="../../Image/pin.png" width="22px" , height="22px" ng-click="pinNote(note.noteID)"/>
+                            </div>
+                            <h4>{{note.description}}</h4>
+                            <div class="icontnhimg">
+                                <img src="../../Image/bell.png" width="20px" , height="20px" />
+                                <img src="../../Image/add-user.png" width="20px" , height="20px" />
+                                <img src="../../Image/paint-palette.png" width="20px" , height="20px" />
+                                <img src="../../Image/photo.png" width="20px" , height="20px" />
+                                <img src="../../Image/ArchiveIcon.png" width="20px" , height="20px" ng-click="archiveNote(note.noteID)"/>
+                                <img src="../../Image/more-vert.png" width="20px" , height="20px" ng-click="popper(note.noteID)" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="popper" ng-show="pop.includes(1)">
+                        <div ng-click="trashNote()"><p>Delete Note</p></div>
+                        <p>Add Label</p>
+                        <p>Add Drawing</p>
+                        <p>Make a copy</p>
+                        <p>Show Checkboxes</p>
+                        <p>Grab image text</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    </div>
+</body>
+
+</html>

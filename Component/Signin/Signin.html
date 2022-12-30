@@ -1,27 +1,13 @@
-<html lang="en" ng-app="FundooNoteApp">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="Signin.css" />
-    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500&family=Josefin+Sans:wght@300&family=Pacifico&display=swap" rel="stylesheet">
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
-    <script src="Signin.js"></script>
-    <script src="../../route.js"></script>
-    <script src="../../ngStorage.js"></script>
-</head>
-
 <body>
     <div class="mainsi" ng-controller="fundooappCtrl">
         <div class="logosi">
-            <img src= "../../Image/Google.png" alt="Google" width="120px" , height="80px" />
+            <img src="../../Image/Google.png" alt="Google" width="120px" , height="80px" />
             <h3>Sign in</h3>
             <h4>to continue to Gmail</h4>
         </div>
         <div class="usersi">
-            <input type="email" ng-model="email" placeholder="Email"/>
-            <input type="password" ng-model="password" placeholder="Password"/>
+            <input type="email" ng-model="email" placeholder="Email" />
+            <input type="password" ng-model="password" placeholder="Password" />
             <a href="#" textDecoration="none">Forgot email?</a>
         </div>
         <div class="guestsi">

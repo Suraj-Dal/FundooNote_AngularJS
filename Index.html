@@ -1,22 +1,28 @@
 <!DOCTYPE html>
 <html lang="en" ng-app="FundooNoteApp">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>FundooNote</title>
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500&family=Josefin+Sans:wght@300&family=Pacifico&display=swap" rel="stylesheet">
     <link href="/Component/Signin/Signin.css" rel="stylesheet">
-    <!-- <link href="/Components/DashBoard/Dashboard.css" rel="stylesheet"> -->
+    <link href="/Component/Dashboard/Dashboard.css" rel="stylesheet">
     <link href="/Component/Signup/Signup.css" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
     <script src="route.js"></script>
+    <!-- <script src="Component/Dashboard/Dashboard.js"></script>
+    <script src="Component/Signin/Signin.js"></script>
+    <script src="Component/Signup/Signup.js"></script> -->
     <script src="app.js"></script>
     <script src="ngStorage.js"></script>
+    
 </head>
-<body ng-controller="fundooappCtrl">
-  
-    <div ng-view>
 
+<body ng-controller="fundooappCtrl">
+    <div ng-view>
     </div>
 </body>
+
 </html>

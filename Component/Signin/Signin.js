@@ -1,4 +1,4 @@
-var app= angular.module("FundooNoteApp",['ngStorage']);
+var app= angular.module("FundooNoteApp",[]);
 
 app.controller("fundooappCtrl",function($scope,$http,$localStorage,$location){
     $scope.email=null;

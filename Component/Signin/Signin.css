@@ -34,6 +34,9 @@ body{
 }
 .usersi input{
     height: 30%;
+    font-family: 'Josefin Sans', sans-serif;
+    font-weight: 1500;
+    font-size: medium;
 }
 .guestsi{
     padding-bottom: 0;
