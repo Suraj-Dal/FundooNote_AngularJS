@@ -1,11 +1,4 @@
-var app = angular.module("FundooNoteApp", []);
-app.controller("signupCtrl", function ($scope, $http) {
-    $scope.firstName = null;
-    $scope.lastName = null;
-    $scope.email = null;
-    $scope.password = null;
-    $scope.confirmPassword = null;
-
+app.controller("signupCtrl", function ($scope, $http,$localStorage,$location, $window) {
     $scope.postdata = function (firstName, lastName, email, password, confirmPassword) {
         if (password == confirmPassword) {
             var data = {
@@ -14,14 +7,11 @@ app.controller("signupCtrl", function ($scope, $http) {
                 email: email,
                 password: password
             }
-            //call the service
             $http.post("https://localhost:44347/api/User/Register", JSON.stringify(data))
                 .then(function (response) {
                     console.log(response);
-
                     if (response.data) {
                         $scope.msg = "Post Data Submitted";
-
                         $scope.firstName = response.data.firstName;
                         $scope.lastName = response.data.lastName;
                         $scope.email = response.data.email;
@@ -30,6 +20,9 @@ app.controller("signupCtrl", function ($scope, $http) {
                 }, function (error) {
                     console.log(error)
                 })
+        }
+        else {
+            alert("Password does not match.")
         }
     };
 })

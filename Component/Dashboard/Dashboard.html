@@ -1,10 +1,12 @@
+<html>
+
 <body>
-    <div ng-controller="fundooappCtrl as note" ng-init="getAllNotes()">
+    <div ng-controller="dashboardCtrl as note" ng-init="getAllNotes()">
         <header class="headerhc">
             <div class="logohc">
                 <img src="../../Image/Menu.png" width="20px" , height="15px" />
                 <img src="../../Image/keep.png" alt="Fundoo Notes" width="40px" , height="40px" />
-                <div>Notes</div>
+                <div>{{titleName[0]}}</div>
             </div>
             <div class="searchhc">
                 <SearchIcon fontSize="medium" />
@@ -22,31 +24,31 @@
         </header>
         <div style="display: flex;">
             <div class="icon" style="opacity: 0.7;">
-                <a href="#" class="sidenavdiv" id="Notes"
+                <div class="sidenavdiv" ng-click="getAllNotes()"
                     style="display: flex; align-items: center; gap: 2.5rem; text-decoration: none;">
                     <img src='../../Image/noteIcon.png' width="22px" , height="25px" />
                     <p>Notes</p>
-                </a>
-                <a href="#" class="sidenavdiv" id="Remainder"
+                </div>
+                <div class="sidenavdiv"
                     style="display: flex; align-items: center;gap: 2.5rem;text-decoration: none;">
                     <img src='../../Image/bell.png' width="23px" , height="27px" />
                     <p>Remainder</p>
-                </a>
-                <a href="#" class="sidenavdiv" id="Label"
+                </div>
+                <div href="#" class="sidenavdiv"
                     style="display: flex; align-items: center;gap: 2.5rem;text-decoration: none;">
                     <img src='../../Image/EditIcon.png' width="21px" , height="25px" />
                     <p>Label</p>
-                </a>
-                <a href="#" class="sidenavdiv" id="Archive"
+                </div>
+                <div class="sidenavdiv" ng-click="setArchView(1)" 
                     style="display: flex; align-items: center;gap: 2.5rem;text-decoration: none;">
                     <img src='../../Image/ArchiveIcon.png' width="23px" , height="25px" />
                     <p>Archive</p>
-                </a>
-                <a href="#" class="sidenavdiv" id="Trash"
+                </div>
+                <div href="#" class="sidenavdiv" ng-click="setTrashView(2)"
                     style="display: flex; align-items: center;gap: 2.5rem;text-decoration: none;">
                     <img src='../../Image/TrashIcon.png' width="22px" , height="25px" />
                     <p>Trash</p>
-                </a>
+                </div>
             </div>
             <div>
                 <div class="note" style="width: 70vw;">
@@ -83,35 +85,57 @@
                 </div>
                 <div style="display: flex;flex-wrap: wrap; margin: 0;">
                     <div class="takenotethree" ng-repeat="note in myNotes">
-                        <div class="notetnh">
+                        <div class="notetnh" id="notetnh" style="background-color: {{note.color}};">
                             <div class="titletnh">
                                 <h4>{{note.title}}</h4>
-                                <img src="../../Image/pin.png" width="22px" , height="22px" ng-click="pinNote(note.noteID)"/>
+                                <img src="../../Image/pin.png" width="22px" , height="22px"
+                                    ng-click="pinNote(note.noteID)" />
                             </div>
                             <h4>{{note.description}}</h4>
                             <div class="icontnhimg">
                                 <img src="../../Image/bell.png" width="20px" , height="20px" />
                                 <img src="../../Image/add-user.png" width="20px" , height="20px" />
-                                <img src="../../Image/paint-palette.png" width="20px" , height="20px" />
+                                <div class="paintPallet">
+                                    <img src="../../Image/paint-palette.png" width="20px" , height="20px" ng-click="colorPopup()" />
+                                    <div class="colorPopper" ng-show="colorPop.includes(1)">
+                                        <div class="colorCode" ng-click="changeColor(note.noteID, color)" ng-repeat="color in colorArray" style="background-color:{{color}} ;">
+                                        </div>
+                                    </div>
+                                </div>
                                 <img src="../../Image/photo.png" width="20px" , height="20px" />
-                                <img src="../../Image/ArchiveIcon.png" width="20px" , height="20px" ng-click="archiveNote(note.noteID)"/>
-                                <img src="../../Image/more-vert.png" width="20px" , height="20px" ng-click="popper(note.noteID)" />
+                                <img src="../../Image/ArchiveIcon.png" width="20px" , height="20px"
+                                    ng-click="archiveNote(note.noteID)" />
+                                <div class="moreVert">
+                                    <img src="../../Image/more-vert.png" width="20px" , height="20px"
+                                    ng-click="popper(note.noteID)" />
+                                    <div class="popper" ng-show="pop.includes(1)">
+                                        <div ng-click="trashNote()">
+                                            <p>Delete Note</p>
+                                        </div>
+                                        <p>Add Label</p>
+                                        <p>Add Drawing</p>
+                                        <p>Make a copy</p>
+                                        <p>Show Checkboxes</p>
+                                        <p>Grab image text</p>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="popper" ng-show="pop.includes(1)">
-                        <div ng-click="trashNote()"><p>Delete Note</p></div>
-                        <p>Add Label</p>
-                        <p>Add Drawing</p>
-                        <p>Make a copy</p>
-                        <p>Show Checkboxes</p>
-                        <p>Grab image text</p>
+                        <div class="popper" ng-show="pop.includes(1)">
+                            <div ng-click="trashNote()">
+                                <p>Delete Note</p>
+                            </div>
+                            <p>Add Label</p>
+                            <p>Add Drawing</p>
+                            <p>Make a copy</p>
+                            <p>Show Checkboxes</p>
+                            <p>Grab image text</p>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
 
-    </div>
     </div>
 </body>
 
