@@ -23,5 +23,18 @@ app.controller("signinCtrl",function($scope,$http,$localStorage,$location, $wind
             }, function (error) {
                 console.log(error)
             })
+        let headersConfig = {
+            headers: {
+                Authorization: "Bearer " + localStorage.getItem("token")
+            }
+        }
+        $http.get("https://localhost:44347/api/User/getUser", headersConfig)
+        .then(function (response){
+            if (response.data) {
+                $window.localStorage.setItem('user', response.data.data);
+            }
+        }, function (error){
+            console.log(error)
+        })
     };
 })

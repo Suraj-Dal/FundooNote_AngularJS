@@ -3,7 +3,11 @@ app.controller("dashboardCtrl", function ($scope,$http,$localStorage,$location, 
     //-----Takenote one and two
     var note = this;
     var noteToTrash = 0;
-    $scope.titleName = ["Notes"]
+    $scope.titleName = ["Notes"];
+    $scope.userView = [0];
+    $scope.collabView = [0];
+    $scope.collabNote = 0;
+    $scope.collabData = [];
     note.toggle = false;
     $scope.colorArray = ["LightSalmon","Pink","PapayaWhip","Khaki","Lavender","Thistle","GreenYellow","Aquamarine","BlanchedAlmond","Gainsboro","AliceBlue"]
     $scope.showButtons = [0];
@@ -62,6 +66,22 @@ app.controller("dashboardCtrl", function ($scope,$http,$localStorage,$location, 
                 console.log(error);
             })
             $scope.titleName = ["Notes"]
+
+        $http.get("https://localhost:44347/api/Collabs/Get", headersConfig)
+        .then(function (response){
+            $scope.collabArray = response.data.data
+            angular.forEach($scope.collabArray, function(id) {
+                $http.get(`https://localhost:44347/api/Notes/getNoteByID?noteID=${id.noteID}`, headersConfig)
+                .then(function (response) {
+                    $scope.collabData.push(response.data.data[0])
+                }, function (error)
+                {
+                    console.log(error)
+                })
+            });
+        },function (error){
+            console.log(error)
+        })
     };
     $scope.setArchView = function () {
         $scope.myNotes = $scope.filterNotes.filter((note) => {
@@ -158,5 +178,52 @@ app.controller("dashboardCtrl", function ($scope,$http,$localStorage,$location, 
                 console.log(error)
             })
             window.location.reload();
+    }
+    $scope.userDetails = function (){
+        console.log($scope.userView)
+        let headersConfig = {
+            headers: {
+                Authorization: "Bearer " + localStorage.getItem("token")
+            }
+        }
+        $http.get("https://localhost:44347/api/User/getUser", headersConfig)
+        .then(function (response){
+            if (response.data) {
+                $scope.User = response.data.data
+            }
+        }, function (error){
+            console.log(error)
+        })
+
+        if ($scope.userView.includes(0)) {
+            $scope.userView = [1];
+        }
+        else {
+            $scope.userView = [0]
+        }
+    }
+    $scope.createAccount = function (){
+        $location.path('/Signup');
+    }
+    $scope.signout = function (){
+        $location.path('/Signin');
+        $window.localStorage.clear();
+    }
+    $scope.collabPopup = function (noteID){
+        $scope.collabView = [1]
+        $scope.collabNote = noteID
+    }
+    $scope.setCollab = function (collabEmail){
+        var noteID = $scope.collabNote
+        $http.post(`https://localhost:44347/api/Collabs/Create?NoteID=${noteID}&Email=${collabEmail}`, null, headersConfig)
+        .then(function (response){
+            console.log(response)
+        }, function (error){
+            console.log(error)
+        })
+        $scope.collabView = [0]
+    }
+    $scope.refreshWindow = function (){
+        window.location.reload();
     }
 })

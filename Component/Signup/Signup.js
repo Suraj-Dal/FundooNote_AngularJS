@@ -16,6 +16,7 @@ app.controller("signupCtrl", function ($scope, $http,$localStorage,$location, $w
                         $scope.lastName = response.data.lastName;
                         $scope.email = response.data.email;
                         $scope.password = response.data.password;
+                        $location.path('/Signin');
                     }
                 }, function (error) {
                     console.log(error)

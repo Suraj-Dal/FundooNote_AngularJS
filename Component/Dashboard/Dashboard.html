@@ -1,7 +1,7 @@
 <html>
 
 <body>
-    <div ng-controller="dashboardCtrl as note" ng-init="getAllNotes()">
+    <div class="dashDiv" ng-controller="dashboardCtrl as note" ng-init="getAllNotes()">
         <header class="headerhc">
             <div class="logohc">
                 <img src="../../Image/Menu.png" width="20px" , height="15px" />
@@ -13,15 +13,16 @@
                 <input type="text" placeholder="Search" />
             </div>
             <div class="opthc">
-                <img src="../../Image/refresh.png" width="18px" , height="18px" />
+                <img class="refresh" src="../../Image/refresh.png" width="18px" , height="18px" ng-click="refreshWindow()"/>
                 <img src="../../Image/view.png" width="25px" , height="23px" style="opacity: 0.5;" />
                 <img src="../../Image/settings.png" width="18px" , height="18px" />
             </div>
-            <div class="userhc">
+            <div class="userhc" ng-click="userDetails()">
                 <img src="../../Image/apps.png" width="18px" , height="18px" style="opacity: 0.6;" />
                 <img src="../../Image/Accounts.png" width="25px" , height="25px" />
             </div>
         </header>
+
         <div style="display: flex;">
             <div class="icon" style="opacity: 0.7;">
                 <div class="sidenavdiv" ng-click="getAllNotes()"
@@ -29,8 +30,7 @@
                     <img src='../../Image/noteIcon.png' width="22px" , height="25px" />
                     <p>Notes</p>
                 </div>
-                <div class="sidenavdiv"
-                    style="display: flex; align-items: center;gap: 2.5rem;text-decoration: none;">
+                <div class="sidenavdiv" style="display: flex; align-items: center;gap: 2.5rem;text-decoration: none;">
                     <img src='../../Image/bell.png' width="23px" , height="27px" />
                     <p>Remainder</p>
                 </div>
@@ -39,7 +39,7 @@
                     <img src='../../Image/EditIcon.png' width="21px" , height="25px" />
                     <p>Label</p>
                 </div>
-                <div class="sidenavdiv" ng-click="setArchView(1)" 
+                <div class="sidenavdiv" ng-click="setArchView(1)"
                     style="display: flex; align-items: center;gap: 2.5rem;text-decoration: none;">
                     <img src='../../Image/ArchiveIcon.png' width="23px" , height="25px" />
                     <p>Archive</p>
@@ -84,6 +84,58 @@
                     </div>
                 </div>
                 <div style="display: flex;flex-wrap: wrap; margin: 0;">
+                    <div class="takenotethree" ng-repeat="note in collabData">
+                        <div class="notetnh" id="notetnh" style="background-color: {{note.color}};">
+                            <div class="titletnh">
+                                <h4>{{note.title}}</h4>
+                                <img src="../../Image/pin.png" width="22px" , height="22px"
+                                    ng-click="pinNote(note.noteID)" />
+                            </div>
+                            <h4>{{note.description}}</h4>
+                            <img src="../../Image/Accounts.png" width="25px" , height="25px" style="padding-left: 10px;"/>
+                            <div class="icontnhimg">
+                                <img src="../../Image/bell.png" width="20px" , height="20px" />
+                                <img src="../../Image/add-user.png" width="20px" , height="20px" ng-click="collabPopup(note.noteID)"/>
+                                <div class="paintPallet">
+                                    <img src="../../Image/paint-palette.png" width="20px" , height="20px"
+                                        ng-click="colorPopup()" />
+                                    <div class="colorPopper" ng-show="colorPop.includes(1)">
+                                        <div class="colorCode" ng-click="changeColor(note.noteID, color)"
+                                            ng-repeat="color in colorArray" style="background-color:{{color}} ;">
+                                        </div>
+                                    </div>
+                                </div>
+                                <img src="../../Image/photo.png" width="20px" , height="20px" />
+                                <img src="../../Image/ArchiveIcon.png" width="20px" , height="20px"
+                                    ng-click="archiveNote(note.noteID)" />
+                                <div class="moreVert">
+                                    <img src="../../Image/more-vert.png" width="20px" , height="20px"
+                                        ng-click="popper(note.noteID)" />
+                                    <div class="popper" ng-show="pop.includes(1)">
+                                        <div ng-click="trashNote()">
+                                            <p>Delete Note</p>
+                                        </div>
+                                        <p>Add Label</p>
+                                        <p>Add Drawing</p>
+                                        <p>Make a copy</p>
+                                        <p>Show Checkboxes</p>
+                                        <p>Grab image text</p>
+                                    </div>
+                                </div>
+                                
+                            </div>
+                        </div>
+                        <div class="popper" ng-show="pop.includes(1)">
+                            <div ng-click="trashNote()">
+                                <p>Delete Note</p>
+                            </div>
+                            <p>Add Label</p>
+                            <p>Add Drawing</p>
+                            <p>Make a copy</p>
+                            <p>Show Checkboxes</p>
+                            <p>Grab image text</p>
+                        </div>
+                    </div>
                     <div class="takenotethree" ng-repeat="note in myNotes">
                         <div class="notetnh" id="notetnh" style="background-color: {{note.color}};">
                             <div class="titletnh">
@@ -94,11 +146,13 @@
                             <h4>{{note.description}}</h4>
                             <div class="icontnhimg">
                                 <img src="../../Image/bell.png" width="20px" , height="20px" />
-                                <img src="../../Image/add-user.png" width="20px" , height="20px" />
+                                <img src="../../Image/add-user.png" width="20px" , height="20px" ng-click="collabPopup(note.noteID)"/>
                                 <div class="paintPallet">
-                                    <img src="../../Image/paint-palette.png" width="20px" , height="20px" ng-click="colorPopup()" />
+                                    <img src="../../Image/paint-palette.png" width="20px" , height="20px"
+                                        ng-click="colorPopup()" />
                                     <div class="colorPopper" ng-show="colorPop.includes(1)">
-                                        <div class="colorCode" ng-click="changeColor(note.noteID, color)" ng-repeat="color in colorArray" style="background-color:{{color}} ;">
+                                        <div class="colorCode" ng-click="changeColor(note.noteID, color)"
+                                            ng-repeat="color in colorArray" style="background-color:{{color}} ;">
                                         </div>
                                     </div>
                                 </div>
@@ -107,7 +161,7 @@
                                     ng-click="archiveNote(note.noteID)" />
                                 <div class="moreVert">
                                     <img src="../../Image/more-vert.png" width="20px" , height="20px"
-                                    ng-click="popper(note.noteID)" />
+                                        ng-click="popper(note.noteID)" />
                                     <div class="popper" ng-show="pop.includes(1)">
                                         <div ng-click="trashNote()">
                                             <p>Delete Note</p>
@@ -135,7 +189,31 @@
                 </div>
             </div>
         </div>
-
+        <div class="userDetail" ng-show="userView.includes(1)">
+            <div class="userImg">
+                <p>{{User.userName[0]}}</p>
+            </div>
+            <div style="display: flex;flex-direction: column;align-items: center;">
+                <p style="font-size: larger; font-weight: 1000;margin: 0;">{{User.userName}}</p>
+                <p>{{User.email}}</p>
+            </div>
+            <div class="addAcount" ng-click="createAccount()">
+                <img src="../../Image/add-user.png" width="20px" , height="20px" />
+                <p>Add Another Acount</p>
+            </div>
+            <button class="signoutBtn" ng-click="signout()">Sign Out</button>
+            <div style="font-size: medium;">
+                Privacy Polic * Terms of Service
+            </div>
+        </div>
+        <div class="collab" ng-show="collabView.includes(1)">
+            <p class="collabTitle">Collaborators</p>
+            <div style="display: flex;align-items: center;gap: 2rem;">
+                <img class="collabImg" src="../../Image/add-user.png" width="30px" , height="30px" />
+                <input class="collabEmail" ng-model="collabEmail" type="text" placeholder="Email to share with" />
+            </div>
+            <button class="collabSave" ng-click="setCollab(collabEmail)">Save</button>
+        </div>
     </div>
 </body>
 
