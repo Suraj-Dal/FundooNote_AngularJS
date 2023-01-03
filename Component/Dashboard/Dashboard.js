@@ -6,6 +6,7 @@ app.controller("dashboardCtrl", function ($scope,$http,$localStorage,$location, 
     $scope.titleName = ["Notes"];
     $scope.userView = [0];
     $scope.collabView = [0];
+    $scope.labelView = [0]
     $scope.collabNote = 0;
     $scope.collabData = [];
     note.toggle = false;
@@ -82,6 +83,14 @@ app.controller("dashboardCtrl", function ($scope,$http,$localStorage,$location, 
         },function (error){
             console.log(error)
         })
+
+        $http.get("https://localhost:44347/api/Label/Get", headersConfig)
+        .then(function (response){
+            console.log(response)
+            $scope.allLabels = response.data.data
+        }, function (error){
+            console.log(error)
+        })
     };
     $scope.setArchView = function () {
         $scope.myNotes = $scope.filterNotes.filter((note) => {
@@ -91,6 +100,7 @@ app.controller("dashboardCtrl", function ($scope,$http,$localStorage,$location, 
             }
         })
         $scope.titleName = ["Archive"]
+        $scope.collabData = null
     }
     $scope.setTrashView = function () {
         $scope.myNotes = $scope.filterNotes.filter((note) => {
@@ -100,6 +110,7 @@ app.controller("dashboardCtrl", function ($scope,$http,$localStorage,$location, 
             }
         })
         $scope.titleName = ["Trash"]
+        $scope.collabData = null
     }
 
     $scope.pop = [0]
@@ -225,5 +236,30 @@ app.controller("dashboardCtrl", function ($scope,$http,$localStorage,$location, 
     }
     $scope.refreshWindow = function (){
         window.location.reload();
+    }
+    $scope.addLabel = function (noteID) {
+        $scope.labelNote = noteID
+        if ($scope.labelView.includes(0)) {
+            $scope.labelView = [1];
+        }
+        else {
+            $scope.labelView = [0]
+        }
+    }
+    $scope.setLabel = function (name){
+        $http.post(`https://localhost:44347/api/Label/Create?Name=${name}&noteID=${$scope.labelNote}`, null, headersConfig)
+        .then(function (response)
+        {
+            if (response.data)
+            {
+                console.log("label res"+response)
+                $scope.labelView = [0]
+                $scope.pop = [0]
+                $scope.refreshWindow();
+            }
+            
+        }, function (error){
+            console.log(error)
+        })
     }
 })
